@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState, type ReactNode, useEffect } from "react";
 import { DraggableContainer } from "./DraggableContainer";
-import type { StackableItem } from "../../lib/types";
+import type { Character } from "../../lib/characters";
 
 interface StackConfig {
   rotation: number;
@@ -9,32 +9,32 @@ interface StackConfig {
   perspective: number;
 }
 
-interface CardStackProps<T extends StackableItem> {
-  items: T[];
-  children: (item: T) => ReactNode;
+interface CardStackProps {
+  items: Character[];
+  children: (item: Character, index: number) => ReactNode;
   containerClassName?: string;
   cardClassName?: string;
   stackConfig?: Partial<StackConfig>;
 }
 
 const defaultConfig: StackConfig = {
-  rotation: 4,
-  scale: 0.06,
-  perspective: 600,
+  rotation: 6,
+  scale: 0.08,
+  perspective: 800,
 };
 
-export function CardStack<T extends StackableItem>({
+export function CardStack({
   items: initialItems,
   children,
   containerClassName = "relative h-52 w-52",
   cardClassName = "absolute h-52 w-52 cursor-grab",
   stackConfig: userConfig = {},
-}: CardStackProps<T>) {
+}: CardStackProps) {
   const [items, setItems] = useState(initialItems);
   const [isReordering, setIsReordering] = useState(false);
   const config = { ...defaultConfig, ...userConfig };
 
-  const sendToBack = (id: T["id"]) => {
+  const sendToBack = (id: Character["id"]) => {
     setIsReordering(true);
     setItems((prev) => {
       const newItems = [...prev];
@@ -47,6 +47,11 @@ export function CardStack<T extends StackableItem>({
     // Reset reordering state after animation
     setTimeout(() => setIsReordering(false), 500);
   };
+
+  // Update items when initialItems change (for filtering)
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
 
   return (
     <div
@@ -78,12 +83,12 @@ export function CardStack<T extends StackableItem>({
               transition: { duration: 0.2 }
             }}
           >
-            {children(item)}
+            {children(item, index)}
           </motion.div>
         </DraggableContainer>
       ))}
       
-      {/* Floating particles effect */}
+      {/* Enhanced floating particles effect */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{
