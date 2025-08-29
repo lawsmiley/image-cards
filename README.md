@@ -15,13 +15,30 @@ An interactive, animated image card stack featuring your favorite One Piece char
 - **🎮 Drag & Drop** - Intuitive card interactions with threshold detection
 - **📱 Responsive Design** - Works perfectly on all devices
 - **🎯 TypeScript Support** - Full type safety and modern development experience
+- **🏷️ Category Filtering** - Organize characters by crew, allies, and villains
+- **🎵 Sound Effects** - Immersive audio feedback for interactions
 
 ## 🎭 Characters Featured
 
+### 👒 Straw Hat Pirates
 - **Monkey D. Luffy** - The fearless Captain with fiery energy
 - **Roronoa Zoro** - The determined Swordsman with green hair
 - **Sanji** - The elegant Cook in a dark suit
 - **Nami** - The clever Navigator with orange hair
+- **Tony Tony Chopper** - The adorable Doctor reindeer
+- **Nico Robin** - The mysterious Archaeologist
+- **Franky** - The cyborg Shipwright
+- **Brook** - The living skeleton Musician
+- **Jinbe** - The honorable Fish-Man Helmsman
+
+### 🤝 Allies
+- **Portgas D. Ace** - Luffy's adopted brother and Fire Fist
+- **Trafalgar Law** - The Surgeon of Death
+- **Red-Haired Shanks** - The inspiring Emperor
+
+### 💀 Villains
+- **Dracule Mihawk** - The World's Greatest Swordsman
+- **Donquixote Doflamingo** - The Joker and former Warlord
 
 ## 🛠️ Technologies Used
 
@@ -60,10 +77,12 @@ An interactive, animated image card stack featuring your favorite One Piece char
 
 ## 🎮 How to Use
 
+- **Filter by category** using the category buttons (Straw Hat Pirates, Allies, Villains)
 - **Drag any character card** to see 3D rotation effects
 - **Drag beyond the threshold** to reorder cards in the stack
-- **Hover over cards** to see character names and roles
+- **Hover over cards** to see character details, powers, bounties, and quotes
 - **Enjoy smooth spring animations** as cards snap back into place
+- **Experience sound effects** during interactions
 
 ## 🏗️ Project Structure
 
@@ -74,11 +93,15 @@ src/
 │   │   ├── CardStack.tsx
 │   │   └── DraggableContainer.tsx
 │   └── features/       # Feature-specific implementations
-│       └── ImageStack.tsx
+│       ├── ImageStack.tsx
+│       ├── CategoryFilter.tsx
+│       └── CharacterCard.tsx
 ├── hooks/              # Custom React hooks
 │   └── useCardRotation.ts
-├── lib/                # Type definitions
-│   └── types.ts
+├── lib/                # Type definitions and data
+│   ├── types.ts
+│   ├── characters.ts
+│   └── soundEffects.ts
 └── App.tsx             # Main application
 ```
 
@@ -86,12 +109,12 @@ src/
 
 ### Adding New Characters
 1. Add character images to the `public/` folder
-2. Update the `items` array in `ImageStack.tsx`
-3. Customize names and roles
+2. Update the `characters` array in `src/lib/characters.ts`
+3. Customize names, roles, bounties, powers, and quotes
 
 ### Changing the Theme
 - Modify background colors in `App.tsx`
-- Adjust card styling in `ImageStack.tsx`
+- Adjust card styling in `CharacterCard.tsx`
 - Customize animations in `CardStack.tsx`
 
 ## 📱 Available Scripts
@@ -113,29 +136,16 @@ src/
 - Threshold detection for card reordering
 - Elastic drag constraints for natural feel
 
-### Treasure Theme Background
-- Animated skull and crossbones elements
-- Floating treasure chest effects
-- Pirate flag animations
+### Dynamic Backgrounds
+- Theme changes based on selected character category
+- Animated elements that match each category
+- Smooth transitions between different themes
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- **Eiichiro Oda** - Creator of One Piece
-- **React Team** - For the amazing framework
-- **Motion Team** - For the smooth animations
-- **One Piece Community** - For the inspiration
+### Character Information
+- Detailed power lists and abilities
+- Current bounty amounts
+- Iconic character quotes
+- Comprehensive descriptions
 
 ## 📞 Contact
 
